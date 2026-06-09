@@ -142,5 +142,9 @@ Review your execution logs to verify that the script successfully scanned your b
 
 Head back to your S3 Bucket Console page and refresh it. Your expired objects will be cleared, confirming that your storage automation works perfectly.
 
+# Assignment 3 - Automated Monitoring of Unencrypted S3 Buckets Using AWS Lambda and Boto3
+
+# Project Objective
+
 
 
