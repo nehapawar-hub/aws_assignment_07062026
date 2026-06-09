@@ -133,7 +133,7 @@ Step 3 : Instantiate and Build your Lambda Function
 
 6. Click Deploy to save your changes.
 
-# Step 4: Validate and Verify Execution
+Step 4: Validate and Verify Execution
 Click the Test button next to the deploy panel, create a generic placeholder test event, and click Save.
 
 Click Test again to run the function code.
