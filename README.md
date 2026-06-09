@@ -78,6 +78,69 @@ Verify that the performance logs document successful resource scanning operation
 Return to the live EC2 Dashboard View to verify status transitions: the instance holding the Auto-Stop parameter pair should enter a Stopping lifecycle state, while the node holding the Auto-Start token should simultaneously spin up into a Pending state.
 
 <img width="1920" height="1080" alt="output" src="https://github.com/user-attachments/assets/be6aae34-257b-4a24-9e99-9a2f402ba45d" />
+**
+# Assignment 2 - Automated S3 Bucket Cleanup Using AWS Lambda and Boto3**
+
+# Project Objective
+
+This project automates cloud storage house-keeping and cost optimization. It deploys a serverless AWS Lambda function that utilizes the Boto3 SDK to automatically scan a targeted Amazon S3 bucket and permanently delete any files (objects) that are older than a 30-day retention threshold.
+
+# WorkFlow
+
+Trigger: The Lambda function is invoked manually (or on a schedule using Amazon EventBridge).
+
+Scan: The function uses Boto3 to list all the metadata details for objects stored in your specific S3 bucket.
+
+Evaluate & Delete: The script calculates the age of each file using its LastModified timestamp. If a file is older than 30 days, Lambda fires a delete command, keeping your storage clean and cost-efficient.
+
+**Configuration Files**
+
+1.IAM Permissions Policy(Permission_policy.json)
+While the lab instructions allow the generic AmazonS3FullAccess policy, production environments require strict least-privilege access.
+Below is the precise JSON configuration required to read and delete objects from S3 and write execution logs.
+
+# Step-by-Step Deployment Guide 
+
+Step 1: Set Up Your S3 Bucket
+
+1.Navigate to the AWS S3 Console and click Create bucket.
+
+2.Give your bucket a unique name (e.g., nehapawar-automated-cleanup-bucket) and click Create bucket.
+
+3.Open your new bucket and select Upload to add several files.
+
+Step 2 : Establish the Lambda Execution Role
+
+1. Navigate to the IAM Dashboard Create Role.
+
+2. Choose AWS service as your trusted entity and select Lambda as the primary use case. Click Next
+
+3. To follow assignment constraints, search for and attach AmazonS3FullAccess. Click Next.
+
+4. Name the role S3CleanupLambdaExecutionRole and click Create role.
+
+Step 3 : Instantiate and Build your Lambda Function
+
+1. Open the AWS Lambda Console and click Create function.
+
+2. Select Author from scratch and name your function s3-bucket-cleanup-automation.
+   
+3. Set your runtime language selector layer to Python 3.x.
+
+4. Expand Change default execution role, choose Use an existing role, and select the S3CleanupLambdaExecutionRole you just created. Click Create function.
+
+5. Clear out the placeholder template code inside the built-in lambda_function.py file editor, paste the script code block from above, and update line 13 with your true S3 bucket name.
+
+6. Click Deploy to save your changes.
+
+# Step 4: Validate and Verify Execution
+Click the Test button next to the deploy panel, create a generic placeholder test event, and click Save.
+
+Click Test again to run the function code.
+
+Review your execution logs to verify that the script successfully scanned your bucket files and logged the names of the expired objects.
+
+Head back to your S3 Bucket Console page and refresh it. Your expired objects will be cleared, confirming that your storage automation works perfectly.
 
 
 
