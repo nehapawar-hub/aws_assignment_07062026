@@ -78,8 +78,8 @@ Verify that the performance logs document successful resource scanning operation
 Return to the live EC2 Dashboard View to verify status transitions: the instance holding the Auto-Stop parameter pair should enter a Stopping lifecycle state, while the node holding the Auto-Start token should simultaneously spin up into a Pending state.
 
 <img width="1920" height="1080" alt="output" src="https://github.com/user-attachments/assets/be6aae34-257b-4a24-9e99-9a2f402ba45d" />
-**
-# Assignment 2 - Automated S3 Bucket Cleanup Using AWS Lambda and Boto3**
+
+# Assignment 2 - Automated S3 Bucket Cleanup Using AWS Lambda and Boto3
 
 # Project Objective
 
