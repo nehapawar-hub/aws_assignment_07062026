@@ -197,3 +197,66 @@ Step 4: Run the Audit and Verify Logs
 2.Click Test again to execute the security script scan.
 
 3.Review the execution outputs in the Execution result sub-tab. The logs will display your custom report summary and clearly flag the exact names of the unencrypted buckets, confirming that your compliance filter works perfectly!
+
+
+# Assignment 4 - Automatic EBS Snapshot and Cost Optimization Cleanup Using AWS Lambda
+
+# Project Objective
+This project automates data protection policies and storage infrastructure cost control. It establishes a serverless AWS Lambda automation loop driven by the Boto3 SDK to routinely execute point-in-time snapshot copies of designated Amazon Elastic Block Store (EBS) volumes. Simultaneously, it evaluates retention windows to automatically purge any snapshots older than 30 days, optimizing backup overhead costs.
+
+# WorkFlow Overview
+
+Trigger Configuration: The architecture is designed to trigger automatically based on a cron/rate schedule managed by Amazon EventBridge (CloudWatch Events).
+
+Backup Execution: The script initializes the EC2 client API, sending a target payload consisting of the specific VolumeId. AWS processes the state freeze to build a backup block replica.
+
+Lifecycle Management: The script loops through existing snapshot inventory arrays owned by the host account. It compares snapshot creation timestamps (StartTime) against an evaluation 
+formula: Cutoff Age = Current Runtime Date} - 30 Days
+Any snapshot matching a value older than this boundary is permanently destroyed via a drop call (delete_snapshot).
+
+# Step-by-Step Deployment Guide
+
+Step 1: Track the Target Block Storage Volume ID
+
+1.Navigate to the AWS EC2 Console $\rightarrow$ Elastic Block Store $\rightarrow$ Volumes.
+
+2.Select your targeted storage partition instance block from the main dashboard and copy its identification serial tracker sequence from the properties window (e.g., vol-0123456789abcdef0).
+
+Step 2 : Establish the Lambda Execution IAM Role
+
+1. Open the IAM Dashboard and search IAM Roles and Click on the Create role.
+
+2. Designate AWS service as the core entity type option, matching the service pointer layer to Lambda.
+
+3. Attach the AmazonEC2FullAccess structural security block rule policy script to satisfy lab parameters. Name the file tracking profile EBSBackupLambdaExecutionRole and click Create.
+
+Step 3: Instantiate and Build the Lambda Block Routine
+
+1.Open the AWS Lambda Console and click Create function using Author from scratch.
+
+2.Title your resource identifier (e.g., ebs-automated-snapshot-manager) and set the runtime compiler configuration to Python 3.x.
+
+3.Expand Change default execution role, select Use an existing role, and select EBSBackupLambdaExecutionRole. Click Create function.
+
+4.Paste the complete script from lambda_function.py into the code editor workspace, and replace the placeholder value "vol-xxxxxxxxxxxxxxxxx" on line 13 with your copied volume ID.
+
+5.Click Deploy.
+
+Step 4: Configure the EventBridge Automation Scheduler (Bonus)
+
+1.Inside your Lambda function panel layout view, navigate to the top diagram overview and choose Add trigger.
+
+2.Select EventBridge (CloudWatch Events) from the interface source selector drop-menu.
+
+3.Select Create a new rule, name it EBSWeeklyBackupSchedule, and set your rule configuration toggle type to Schedule expression.
+
+4.Enter an automated cron/rate mapping string (e.g., rate(7 days)) to control execution interval routines, and click the blue Add button.
+
+Step 5: Test Execution and Verify Infrastructure Status
+
+1.Click the Test layout interface button control, save an empty generic profile mock payload trigger template, and execute by clicking Test.
+
+2.Audit operational telemetry scripts inside the execution console print log reports to ensure successful snapshot creation and array tracking actions.
+
+3.Open the EC2 Console Snapshot Dashboard window view panel to check and verify that your automated data block replica has been logged, stored, and tagged safely!
+
