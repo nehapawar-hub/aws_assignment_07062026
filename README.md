@@ -147,4 +147,53 @@ Head back to your S3 Bucket Console page and refresh it. Your expired objects wi
 # Project Objective
 
 
+This project focuses on automating cloud security posture management (CSPM). It establishes a serverless AWS Lambda function using the Boto3 SDK to audit all Amazon S3 buckets in an AWS account.
 
+The function flags buckets that do not have Server-Side Encryption (SSE) enabled, providing automated compliance monitoring to catch security misconfigurations before they leak data.
+
+# WorkFlow Overview
+
+1. Trigger : The Lambda function is manually invoked or scheduled to run routinely.
+
+2. Global Inventory Check: The script contacts the S3 API to fetch an inventory list of every bucket owned by the AWS account.
+
+3. Security Audit Loop: The code loops through each bucket and checks its get_bucket_encryption configuration. If a bucket throws a specific error code (ServerSideEncryptionConfigurationNotFoundError), it means encryption is disabled, and the script prints a warning to the logs.
+
+# Step-by-Step Deployment Guide
+
+Step 1: Set Up Test S3 Buckets
+1.Navigate to the AWS S3 Console and click Create bucket.
+
+2.Create 2 or 3 buckets with unique names.
+
+3.Crucial Setup Detail: AWS now enables SSE-S3 encryption by default on new buckets. To simulate an unencrypted bucket for this assignment, open one or two of your test buckets, go to the Properties tab, scroll down to Default encryption, click Edit, select Disable, and save your changes.
+
+Step 2: Create the Lambda IAM Execution Role
+
+1.Navigate to the IAM Dashboard Search Roles and Create role.
+
+2.Set the Trusted Entity to AWS service and the target use case to Lambda. Click Next
+
+3.Search for and check the box next to AmazonS3ReadOnlyAccess to satisfy the assignment requirement. Click Next.
+
+4.Name your role S3AuditLambdaExecutionRole and click Create role.
+
+Step 3: Provision the Lambda Function
+
+1.Go to the AWS Lambda Console and click Create function.
+
+2.Choose Author from scratch and name the function s3-encryption-security-audit.
+
+3.Set your runtime engine setting to Python 3.x.
+
+4.Expand Change default execution role, select Use an existing role, and assign your S3AuditLambdaExecutionRole. Click Create function.
+
+5.Clear out the default snippet inside the lambda_function.py code editor workspace, paste the full audit script from above, and click Deploy.
+
+Step 4: Run the Audit and Verify Logs
+
+1.Click the Test panel button, configure a simple placeholder event profile name, and hit Save
+
+2.Click Test again to execute the security script scan.
+
+3.Review the execution outputs in the Execution result sub-tab. The logs will display your custom report summary and clearly flag the exact names of the unencrypted buckets, confirming that your compliance filter works perfectly!
