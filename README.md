@@ -18,5 +18,22 @@ State Execution: * Active instances marked with Action=Auto-Stop receive a shutd
 
 Dormant instances marked with Action=Auto-Start receive a wake-up command (start_instances).
 
+# Step-by-Step Deployment Guide 
 
-# Repository Structure
+Step 1: Provision EC2 Instances and Configuration Metadata
+
+1. Navigate to the AWS EC2 Management Console and launch two separate virtual computing nodes (e.g., t2.micro free-tier instances).
+
+2. Open the Instances workspace list, select the first instance, choose the Tags configuration sub-panel, and select Manage tags.
+
+3. Create a metadata keypair matching case-sensitively:
+
+Key: Action | Value: Auto-Stop
+
+4. Select the second node and apply the matching keypair metadata configuration:
+
+Key: Action | Value: Auto-Start
+
+5. Ensure the first instance is in a Running state, and the second instance is completely Stopped prior to running tests.
+
+# Step 2: Establish the Lambda Execution Security Context
