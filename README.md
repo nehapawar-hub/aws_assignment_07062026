@@ -214,11 +214,15 @@ Lifecycle Management: The script loops through existing snapshot inventory array
 formula: Cutoff Age = Current Runtime Date} - 30 Days
 Any snapshot matching a value older than this boundary is permanently destroyed via a drop call (delete_snapshot).
 
+ScreenShots:
+
+<img width="1920" height="1080" alt="vol-0a6511c72c8fff428" src="https://github.com/user-attachments/assets/555ee436-734d-45e6-ad72-a239f5ec1edb" />
+
 # Step-by-Step Deployment Guide
 
 Step 1: Track the Target Block Storage Volume ID
 
-1.Navigate to the AWS EC2 Console $\rightarrow$ Elastic Block Store $\rightarrow$ Volumes.
+1.Navigate to the AWS EC2 Console Elastic Block Store and find Volumes.
 
 2.Select your targeted storage partition instance block from the main dashboard and copy its identification serial tracker sequence from the properties window (e.g., vol-0123456789abcdef0).
 
@@ -228,7 +232,16 @@ Step 2 : Establish the Lambda Execution IAM Role
 
 2. Designate AWS service as the core entity type option, matching the service pointer layer to Lambda.
 
-3. Attach the AmazonEC2FullAccess structural security block rule policy script to satisfy lab parameters. Name the file tracking profile EBSBackupLambdaExecutionRole and click Create.
+Screenshots:
+
+
+
+4. Attach the AmazonEC2FullAccess structural security block rule policy script to satisfy lab parameters. Name the file tracking profile EBSBackupLambdaExecutionRole and click Create.
+
+Screenshots:
+
+<img width="1920" height="1080" alt="LambdaBackupFunction" src="https://github.com/user-attachments/assets/2850d916-1beb-4bbe-ab2f-cd5b12083dd8" />
+
 
 Step 3: Instantiate and Build the Lambda Block Routine
 
@@ -241,6 +254,10 @@ Step 3: Instantiate and Build the Lambda Block Routine
 4.Paste the complete script from lambda_function.py into the code editor workspace, and replace the placeholder value "vol-xxxxxxxxxxxxxxxxx" on line 13 with your copied volume ID.
 
 5.Click Deploy.
+
+Screenshot:
+
+<img width="1920" height="1080" alt="EBSBackupLambdaRole" src="https://github.com/user-attachments/assets/d408035f-6d5e-4c95-bf88-5f34b1d89e0d" />
 
 Step 4: Configure the EventBridge Automation Scheduler (Bonus)
 
@@ -260,3 +277,6 @@ Step 5: Test Execution and Verify Infrastructure Status
 
 3.Open the EC2 Console Snapshot Dashboard window view panel to check and verify that your automated data block replica has been logged, stored, and tagged safely!
 
+Output ScreenShots:
+
+<img width="1920" height="1080" alt="output" src="https://github.com/user-attachments/assets/ee425ffb-e958-456e-9cb4-8afe425948ad" />
