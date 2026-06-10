@@ -105,9 +105,16 @@ Step 1: Set Up Your S3 Bucket
 
 1.Navigate to the AWS S3 Console and click Create bucket.
 
-2.Give your bucket a unique name (e.g., nehapawar-automated-cleanup-bucket) and click Create bucket.
+2.Give your bucket a unique name (my-lambda-cleanup-bucket-2026) and click Create bucket.
+
+Screenshots:
+<img width="1918" height="1080" alt="image" src="https://github.com/user-attachments/assets/30a1241d-a4b9-44cf-ba96-1d60be3aa69c" />
+
 
 3.Open your new bucket and select Upload to add several files.
+
+Screenshot:
+<img width="1918" height="1080" alt="image" src="https://github.com/user-attachments/assets/3eb0fe25-648b-48ef-b569-153adc144aaa" />
 
 Step 2 : Establish the Lambda Execution Role
 
@@ -118,7 +125,9 @@ Step 2 : Establish the Lambda Execution Role
 3. To follow assignment constraints, search for and attach AmazonS3FullAccess. Click Next.
 
 4. Name the role S3CleanupLambdaExecutionRole and click Create role.
+ScreenShots:
 
+<img width="1920" height="1080" alt="CreateRole" src="https://github.com/user-attachments/assets/fa47b5ff-b7c1-4dd2-b9f5-23865e399949" />
 Step 3 : Instantiate and Build your Lambda Function
 
 1. Open the AWS Lambda Console and click Create function.
@@ -141,6 +150,11 @@ Click Test again to run the function code.
 Review your execution logs to verify that the script successfully scanned your bucket files and logged the names of the expired objects.
 
 Head back to your S3 Bucket Console page and refresh it. Your expired objects will be cleared, confirming that your storage automation works perfectly.
+
+Screenshot:
+
+<img width="1920" height="1080" alt="output" src="https://github.com/user-attachments/assets/3f6365b5-b7d8-452c-904d-ceb62b7f4911" />
+
 
 # Assignment 3 - Automated Monitoring of Unencrypted S3 Buckets Using AWS Lambda and Boto3
 
