@@ -182,6 +182,9 @@ Step 1: Set Up Test S3 Buckets
 
 3.Crucial Setup Detail: AWS now enables SSE-S3 encryption by default on new buckets. To simulate an unencrypted bucket for this assignment, open one or two of your test buckets, go to the Properties tab, scroll down to Default encryption, click Edit, select Disable, and save your changes.
 
+ScreenShot:
+<img width="1920" height="1078" alt="bucketencryption" src="https://github.com/user-attachments/assets/1b4946b8-5031-4d70-b539-dc49c048a608" />
+
 Step 2: Create the Lambda IAM Execution Role
 
 1.Navigate to the IAM Dashboard Search Roles and Create role.
@@ -191,6 +194,10 @@ Step 2: Create the Lambda IAM Execution Role
 3.Search for and check the box next to AmazonS3ReadOnlyAccess to satisfy the assignment requirement. Click Next.
 
 4.Name your role S3AuditLambdaExecutionRole and click Create role.
+
+ScreenShot:
+<img width="1920" height="1078" alt="functionCreated" src="https://github.com/user-attachments/assets/079e2eab-7e7e-4e60-b827-9c963271bbd0" />
+
 
 Step 3: Provision the Lambda Function
 
@@ -211,6 +218,10 @@ Step 4: Run the Audit and Verify Logs
 2.Click Test again to execute the security script scan.
 
 3.Review the execution outputs in the Execution result sub-tab. The logs will display your custom report summary and clearly flag the exact names of the unencrypted buckets, confirming that your compliance filter works perfectly!
+
+Screenshot:
+
+<img width="1920" height="1078" alt="output-1" src="https://github.com/user-attachments/assets/d888a5d1-dad4-4241-b8c5-d77cd6352bf3" />
 
 
 # Assignment 4 - Automatic EBS Snapshot and Cost Optimization Cleanup Using AWS Lambda
